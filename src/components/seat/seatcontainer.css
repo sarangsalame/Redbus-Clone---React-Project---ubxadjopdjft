@@ -1,0 +1,33 @@
+.seat_container{
+    width: 300px;
+    height: 200px;
+    border: 1px solid red;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+}
+.seat_container button{
+    width: 25px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+.double_seat{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    border: 1px solid black;
+    width: 300px;
+    height: 70px;
+    
+}
+.double_seat .row1, .double_seat .row2, .single_seat{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
