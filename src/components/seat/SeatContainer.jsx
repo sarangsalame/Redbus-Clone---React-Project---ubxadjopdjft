@@ -1,40 +1,47 @@
-import React from "react";
+import React,{useState} from "react";
 import "./seatcontainer.css";
 const SeatContainer = () => {
+    const [seatNumber, setSeatNumber] = useState("");
+    function getSeatNumber(e){
+        setSeatNumber(e.target.value)
+        console.log(seatNumber)
+    }
   return (
+    <div className="seat_container_center">
     <div className='seat_container'>
       <div className='double_seat'>
         <div className='row1'>
-          <button>L1</button>
-          <button>L2</button>
-          <button>L3</button>
-          <button>L4</button>
-          <button>L5</button>
-          <button>L6</button>
-          <button>L7</button>
-          <button>L8</button>
+          <button onClick={getSeatNumber} value="L1">L1</button>
+          <button onClick={getSeatNumber} value="L2">L2</button>
+          <button onClick={getSeatNumber} value="L3">L3</button>
+          <button onClick={getSeatNumber} value="L4">L4</button>
+          <button onClick={getSeatNumber} value="L5">L5</button>
+          <button onClick={getSeatNumber} value="L6">L6</button>
+          <button onClick={getSeatNumber} value="L7">L7</button>
+          <button onClick={getSeatNumber} value="L8">L8</button>
         </div>
         <div className='row2'>
-          <button>L9</button>
-          <button>L10</button>
-          <button>L11</button>
-          <button>L12</button>
-          <button>L13</button>
-          <button>L14</button>
-          <button>L15</button>
-          <button>L16</button>
+          <button onClick={getSeatNumber} value="L9">L9</button>
+          <button onClick={getSeatNumber} value="L10">L10</button>
+          <button onClick={getSeatNumber} value="L11">L11</button>
+          <button onClick={getSeatNumber} value="L12">L12</button>
+          <button onClick={getSeatNumber} value="L13">L13</button>
+          <button onClick={getSeatNumber} value="L14">L14</button>
+          <button onClick={getSeatNumber} value="L15">L15</button>
+          <button onClick={getSeatNumber} value="L16">L16</button>
         </div>
       </div>
       <div className='single_seat'>
-        <button>L17</button>
-        <button>L18</button>
-        <button>L19</button>
-        <button>L20</button>
-        <button>L21</button>
-        <button>L22</button>
-        <button>L23</button>
-        <button>L24</button>
+        <button onClick={getSeatNumber} value="L17">L17</button>
+        <button onClick={getSeatNumber} value="L18">L18</button>
+        <button onClick={getSeatNumber} value="L19">L19</button>
+        <button onClick={getSeatNumber} value="L20">L20</button>
+        <button onClick={getSeatNumber} value="L21">L21</button>
+        <button onClick={getSeatNumber} value="L22">L22</button>
+        <button onClick={getSeatNumber} value="L23">L23</button>
+        <button onClick={getSeatNumber} value="L24">L24</button>
       </div>
+    </div>
     </div>
   );
 };

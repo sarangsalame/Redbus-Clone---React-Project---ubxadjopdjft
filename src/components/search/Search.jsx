@@ -4,6 +4,8 @@ import "./search.css";
 import BusImg from "../busimg/BusImg";
 
 import TitleComp from "../title/TitleComp";
+import SeatContainer from "../seat/SeatContainer";
+import Ticket from "../ticket/Ticket";
 
 const Search = () => {
   let [formData, setFormData] = useState({
@@ -11,9 +13,9 @@ const Search = () => {
     destination: "",
     date: "",
   });
-  let [err, setErr] = useState(false);
-  let [busApiData, setBusApiData] = useState([]);
-
+  const [err, setErr] = useState(false);
+  const [busApiData, setBusApiData] = useState([]);
+  const [isClicked, setIsClicked] = useState(false);
 
   // getting source destination
   const getSource = (e) => {
@@ -45,15 +47,13 @@ const Search = () => {
   // check if all input fields are filled or notif all goes well then display data
   const checkAvailability = (e) => {
     e.preventDefault();
-    
+
     if (
       formData.source == "" ||
       formData.destination == "" ||
       formData.date == ""
     ) {
       setErr(true);
-
-      
     } else {
       setErr(false);
       getapidata();
@@ -71,13 +71,15 @@ const Search = () => {
   // },[formData.source, formData.destination])
 
   function sortByPrice() {
-    const newBusData = busApiData.sort(function (a, b) {
+    let newApidata = [...busApiData];
+    newApidata.sort(function (a, b) {
       return Number(a.ticketPrice) - Number(b.ticketPrice);
     });
-    setBusApiData(newBusData);
+
+    setBusApiData(newApidata);
     console.log(busApiData);
   }
-  
+
   function sortByArivalTime() {
     let newBusData = busApiData.sort(function (a, b) {
       if (a.arrivalTime < b.arrivalTime) {
@@ -90,7 +92,6 @@ const Search = () => {
     });
     setBusApiData(newBusData);
     console.log(busApiData);
-    
   }
   function sortByDepartureTime() {
     let newBusData = busApiData.sort(function (a, b) {
@@ -104,42 +105,9 @@ const Search = () => {
     });
     setBusApiData(newBusData);
     console.log(busApiData);
-    
   }
   function selectingSeats() {
-    return (
-      <div>
-        <div className='api_data'>
-          <div className='api_data_elements'>
-            <h4>Bus Name: </h4>
-            {ele.busName}
-          </div>
-          <div className='api_data_elements'>
-            <h4>Arival Time: </h4>
-            {ele.arrivalTime}
-          </div>
-          <div className='api_data_elements'>
-            <h4>Departure Time: </h4>
-            {ele.departureTime}
-          </div>
-          <div className='api_data_elements'>
-            <h4>Journey Date: </h4>
-            {ele.date}
-          </div>
-          <div className='api_data_elements'>
-            <h4>Price: </h4>
-            {ele.ticketPrice}/-
-          </div>
-        </div>
-        <div className='seat_details_container'>
-          <BusImg/>
-          
-          <div className="book_ticket">
-            <button>BOOK TICKET</button>
-          </div>
-        </div>
-      </div>
-    );
+    setIsClicked(!isClicked)
   }
 
   return (
@@ -200,29 +168,36 @@ const Search = () => {
                   <li
                     className='api_data'
                     key={ele.id}
-                    onClick={selectingSeats}
+                    onClick={() => {
+                      selectingSeats();
+                    }}
                   >
                     {console.log(busApiData)}
-                    <div className='api_data_elements'>
-                      <h4>Bus Name: </h4>
-                      {ele.busName}
-                    </div>
-                    <div className='api_data_elements'>
-                      <h4>Arival Time: </h4>
-                      {ele.arrivalTime}
-                    </div>
-                    <div className='api_data_elements'>
-                      <h4>Departure Time: </h4>
-                      {ele.departureTime}
-                    </div>
-                    <div className='api_data_elements'>
-                      <h4>Journey Date: </h4>
-                      {ele.date}
-                    </div>
-                    <div className='api_data_elements'>
-                      <h4>Price: </h4>
-                      {ele.ticketPrice}/-
-                    </div>
+
+                    {!isClicked ? (
+                      <div className="api__data_element_warpper">
+                        <div className='api_data_elements'>
+                          <h4>Bus Name: </h4>
+                          {ele.busName}
+                        </div>
+                        <div className='api_data_elements'>
+                          <h4>Arival Time: </h4>
+                          {ele.arrivalTime}
+                        </div>
+                        <div className='api_data_elements'>
+                          <h4>Departure Time: </h4>
+                          {ele.departureTime}
+                        </div>
+                        <div className='api_data_elements'>
+                          <h4>Journey Date: </h4>
+                          {ele.date}
+                        </div>
+                        <div className='api_data_elements'>
+                          <h4>Price: </h4>
+                          {ele.ticketPrice}/-
+                        </div>
+                      </div>
+                    ):<Ticket/> }
                   </li>
                 );
               })}
